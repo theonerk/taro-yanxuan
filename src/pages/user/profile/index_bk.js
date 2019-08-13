@@ -1,9 +1,9 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import defaultAvatar from '@assets/default-avatar.png'
-//import Vip from './vip'
+import Vip from './vip'
 import bg from './assets/bg.png'
-//import qrCode from './assets/qr-code.png'
+import qrCode from './assets/qr-code.png'
 import level01 from './assets/level-01.png'
 import './index.scss'
 
@@ -66,9 +66,16 @@ export default class Profile extends Component {
             }
           </View>
 
-         
+          <View className='user-profile__extra'>
+            <View className='user-profile__extra-qr'>
+              <Image
+                className='user-profile__extra-qr-img'
+                src={qrCode}
+              />
+            </View>
+          </View>
 
-          
+          <Vip />
         </View>
       </View>
     )

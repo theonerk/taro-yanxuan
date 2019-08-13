@@ -1,12 +1,13 @@
-import { USER_INFO, USER_LOGIN, USER_LOGOUT } from '@constants/user'
+import { USER_PROFILE, USER_LOGOUT,USER_REAL_LOGIN } from '@constants/user'
 
 const INITIAL_STATE = {
-  userInfo: {}
+  userInfo: {},
+  session:''
 }
 
 export default function user(state = INITIAL_STATE, action) {
   switch(action.type) {
-    case USER_INFO: {
+    case USER_PROFILE: {
       return {
         ...state,
         userInfo: {
@@ -14,9 +15,14 @@ export default function user(state = INITIAL_STATE, action) {
           login: true
         }
       }
-    }
-    case USER_LOGIN: {
-      return { ...state }
+    } 
+    
+    case USER_REAL_LOGIN:{   
+      return { ...state,
+              userInfo:{
+                ...action.payload,
+                login:true
+              }}
     }
     case USER_LOGOUT: {
       return {

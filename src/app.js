@@ -32,7 +32,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '网易严选',
+      navigationBarTitleText: '低价严选',
       navigationBarTextStyle: 'black'
     },
     tabBar: {
@@ -44,17 +44,19 @@ class App extends Component {
         pagePath: "pages/home/home",
         iconPath: "./assets/tab-bar/home.png",
         selectedIconPath: "./assets/tab-bar/home-active.png",
-        text: "首页"
-      }, {
-        pagePath: "pages/cate/cate",
-        iconPath: "./assets/tab-bar/cate.png",
-        selectedIconPath: "./assets/tab-bar/cate-active.png",
-        text: "分类"
-      }, {
+        text: "今日推荐"
+      }, 
+      //{
+      //  pagePath: "pages/cate/cate",
+      //  iconPath: "./assets/tab-bar/cate.png",
+      //  selectedIconPath: "./assets/tab-bar/cate-active.png",
+      //  text: "分类"
+      //}, 
+      {
         pagePath: "pages/cart/cart",
         iconPath: "./assets/tab-bar/cart.png",
         selectedIconPath: "./assets/tab-bar/cart-active.png",
-        text: "购物车"
+        text: "往期幸运星"
       }, {
         pagePath: "pages/user/user",
         iconPath: "./assets/tab-bar/user.png",

@@ -6,7 +6,7 @@ import { dispatchCartNum } from '@actions/cart'
 import { getWindowHeight } from '@utils/style'
 import Profile from './profile'
 import Menu from './menu'
-import Activity from './activity'
+//import Activity from './activity'
 import './user.scss'
 
 @connect(state => state.user, { ...actions, dispatchCartNum })
@@ -15,7 +15,7 @@ class User extends Component {
     navigationBarTitleText: '个人中心'
   }
 
-  componentDidShow() {
+  componentDidShow() { 
     this.props.dispatchUser()
     this.props.dispatchCartNum()
   }
@@ -37,16 +37,12 @@ class User extends Component {
           style={{ height: getWindowHeight() }}
         >
           <Profile userInfo={userInfo} />
-          <Menu />
-          {userInfo.login &&
-            <View className='user__logout' onClick={this.handleLogin}>
-              <Text className='user__logout-txt'>切换账号</Text>
-            </View>
-          }
+           
+          
           <View className='user__empty' />
         </ScrollView>
         <View className='user__activity'>
-          <Activity />
+          
         </View>
       </View>
     )

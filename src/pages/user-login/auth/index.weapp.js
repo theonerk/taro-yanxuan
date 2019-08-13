@@ -1,23 +1,53 @@
 import Taro, { Component } from '@tarojs/taro'
 import { ButtonItem } from '@components'
+import * as actions from '@actions/user'
+import { connect } from '@tarojs/redux'
 
 // XXX 仅仅作为多端组件示例，实际只实现了邮箱登录
+@connect(state => state.user, { ...actions })
 export default class AUth extends Component {
   agreeAuth = () => {
-    Taro.getUserInfo().then((res) => {
-      const { errMsg, userInfo } = res
-      if (errMsg === 'getUserInfo:ok') {
-        Taro.showToast({
-          title: `微信昵称: ${userInfo.nickName}，请使用邮箱登录`,
-          icon: 'none'
-        })
-      } else {
-        Taro.showToast({
-          title: '授权失败',
-          icon: 'none'
-        })
+    Taro.login().then((response) => { 
+      const { errMsg, code } = response 
+      if(errMsg === 'login:ok'){ 
+        Taro.getUserInfo().then((res) => {
+        const {   userInfo,iv,encryptedData } = res 
+        
+        if (res.errMsg === 'getUserInfo:ok') {
+          const payload = {
+            iv: iv,
+            encryptedData:encryptedData,
+            code: code
+          } 
+          this.props.dispatchLogin_Real(payload).then(() =>{
+             // console.log("login !!!");  
+             // console.log(result);    
+              Taro.showToast({
+              title: `欢迎: ${userInfo.nickName}！`,
+              icon: 'none'
+              })
+              Taro.navigateBack({ delta: 2 })
+           }
+           ).catch(() => {
+              Taro.showToast({
+              title: `登录失败`,
+              icon: 'none'
+              })
+            });
+                  
+        } else {
+          Taro.showToast({
+            title: '授权失败',
+            icon: 'none'
+          })
+        }
+       })
       }
-    })
+        
+         
+        })
+
+    
   }
 
   render () {

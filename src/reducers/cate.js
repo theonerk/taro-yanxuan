@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 export default function cate(state = INITIAL_STATE, action) {
   switch(action.type) {
     case CATE_MENU: {
+     // console.log("action:",action); 
       const { categoryList } = action.payload
       const menu = categoryList.map(({ id, name }) => ({ id, name }))
       return { ...state, menu, category: categoryList }
@@ -22,6 +23,7 @@ export default function cate(state = INITIAL_STATE, action) {
     }
     case CATE_SUB_LIST: {
       const { id, itemList } = action.payload
+     
       return {
         ...state,
         subCategory: { ...state.subCategory, [id]: itemList }

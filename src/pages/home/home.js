@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Image, ScrollView } from '@tarojs/components'
+import { View, Text, ScrollView } from '@tarojs/components'
 import { Loading } from '@components'
 import { connect } from '@tarojs/redux'
 import * as actions from '@actions/home'
@@ -7,14 +7,14 @@ import { dispatchCartNum } from '@actions/cart'
 import { getWindowHeight } from '@utils/style'
 import Banner from './banner'
 import Policy from './policy'
-import Pin from './pin'
-import Operation from './operation'
-import Manufactory from './manufactory'
-import FlashSale from './flash-sale'
-import Popular from './popular'
-import Category from './category'
+//import Pin from './pin'
+//import Operation from './operation'
+//import Manufactory from './manufactory'
+//import FlashSale from './flash-sale'
+//import Popular from './popular'
+//import Category from './category'
 import Recommend from './recommend'
-import searchIcon from './assets/search.png'
+//import searchIcon from './assets/search.png'
 import './home.scss'
 
 const RECOMMEND_SIZE = 20
@@ -22,7 +22,7 @@ const RECOMMEND_SIZE = 20
 @connect(state => state.home, { ...actions, dispatchCartNum })
 class Home extends Component {
   config = {
-    navigationBarTitleText: '网易严选'
+    navigationBarTitleText: '低价严选'
   }
 
   state = {
@@ -33,13 +33,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // NOTE 暂时去掉不适配的内容
-    Taro.showToast({
-      title: '注意，由于严选小程序首页界面、接口大幅变动，暂时去掉不相符的部分，后续再跟进改动',
-      icon: 'none',
-      duration: 6000
-    })
-
+    // NOTE 暂时去掉不适配的内容 
     this.props.dispatchHome().then(() => {
       this.setState({ loaded: true })
     })
@@ -84,17 +78,18 @@ class Home extends Component {
       return <Loading />
     }
 
-    const { homeInfo, searchCount, recommend, pin } = this.props
+    const { homeInfo, recommend  } = this.props
     return (
       <View className='home'>
-        <View className='home__search'>
+        {/* <View className='home__search'>
           <View className='home__search-wrap' onClick={this.handlePrevent}>
             <Image className='home__search-img' src={searchIcon} />
             <Text className='home__search-txt'>
               {`搜索商品，共${searchCount}款好物`}
             </Text>
           </View>
-        </View>
+        </View>*/}
+        
         <ScrollView
           scrollY
           className='home__wrap'
@@ -105,11 +100,11 @@ class Home extends Component {
             <Banner list={homeInfo.focus} />
             <Policy list={homeInfo.policyDesc} />
 
-            {/* 免费拼团 */}
-            <Pin
+            {/* 免费拼团 
+            * <Pin
               banner={homeInfo.newUserExclusive}
-              list={pin}
-            />
+              list={pin} 
+            /> */}
 
             {/* 不知道叫啥 */}
             {/* <Operation

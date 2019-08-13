@@ -5,6 +5,7 @@
 /* eslint-disable */
 export const host = HOST
 export const hostM = HOST_M
+export const real_host= REAL_HOST
 /* eslint-enable */
 
 // pic
@@ -37,3 +38,10 @@ export const API_CHECK_LOGIN = `${host}/xhr/u/checkLogin.json`
 // item
 export const API_ITEM = `${host}/xhr/item/detail.json`
 export const API_ITEM_RECOMMEND = `${host}/xhr/rcmd/itemDetail.json`
+
+
+// real login
+export const API_USER_WeChat_LOGIN = `${real_host}/login`
+export const API_USER_RROFILE = `${real_host}/api/user`
+
+export const API_PRODUCTS=`${real_host}/api/products`

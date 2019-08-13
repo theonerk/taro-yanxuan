@@ -2,14 +2,17 @@
 const isH5 = process.env.CLIENT_ENV === 'h5'
 const HOST = '"https://miniapp.you.163.com"'
 const HOST_M = '"https://m.you.163.com"'
-
+//const REAL_HOST = '"https://int-tax.azurewebsites.net"'
+const REAL_HOST = '"http://localhost:7001"'
+// eslint-disable-next-line import/no-commonjs
 module.exports = {
   env: {
     NODE_ENV: '"development"'
   },
   defineConstants: {
     HOST: isH5 ? '"/api"' : HOST,
-    HOST_M: isH5 ? '"/api-m"' : HOST_M
+    HOST_M: isH5 ? '"/api-m"' : HOST_M,
+    REAL_HOST: isH5 ? '"/api-m-r"' : REAL_HOST,
   },
   weapp: {},
   h5: {
