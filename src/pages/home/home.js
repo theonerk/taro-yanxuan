@@ -4,6 +4,7 @@ import { Loading } from '@components'
 import { connect } from '@tarojs/redux'
 import * as actions from '@actions/home'
 import { dispatchCartNum } from '@actions/cart'
+import { dispatchProducts } from "@actions/product"
 import { getWindowHeight } from '@utils/style'
 import Banner from './banner'
 import Policy from './policy'
@@ -13,13 +14,14 @@ import Policy from './policy'
 //import FlashSale from './flash-sale'
 //import Popular from './popular'
 //import Category from './category'
-import Recommend from './recommend'
+//import Recommend from './recommend'
+import  Lottery from './lottery'
 //import searchIcon from './assets/search.png'
 import './home.scss'
 
 const RECOMMEND_SIZE = 20
 
-@connect(state => state.home, { ...actions, dispatchCartNum })
+@connect(state => state.home, { ...actions, dispatchCartNum,dispatchProducts })
 class Home extends Component {
   config = {
     navigationBarTitleText: '低价严选'
@@ -29,7 +31,8 @@ class Home extends Component {
     loaded: false,
     loading: false,
     lastItemId: 0,
-    hasMore: true
+    hasMore: true,
+   
   }
 
   componentDidMount() {
@@ -41,6 +44,7 @@ class Home extends Component {
     this.props.dispatchSearchCount()
     this.props.dispatchPin({ orderType: 4, size: 12 })
     this.loadRecommend()
+    this.props.dispatchProducts();
   }
 
   loadRecommend = () => {
@@ -78,18 +82,11 @@ class Home extends Component {
       return <Loading />
     }
 
-    const { homeInfo, recommend  } = this.props
+    const { homeInfo ,recommend,products } = this.props
+   
+    
     return (
-      <View className='home'>
-        {/* <View className='home__search'>
-          <View className='home__search-wrap' onClick={this.handlePrevent}>
-            <Image className='home__search-img' src={searchIcon} />
-            <Text className='home__search-txt'>
-              {`搜索商品，共${searchCount}款好物`}
-            </Text>
-          </View>
-        </View>*/}
-        
+      <View className='home'>  
         <ScrollView
           scrollY
           className='home__wrap'
@@ -98,39 +95,12 @@ class Home extends Component {
         >
           <View onClick={this.handlePrevent}>
             <Banner list={homeInfo.focus} />
-            <Policy list={homeInfo.policyDesc} />
-
-            {/* 免费拼团 
-            * <Pin
-              banner={homeInfo.newUserExclusive}
-              list={pin} 
-            /> */}
-
-            {/* 不知道叫啥 */}
-            {/* <Operation
-              list={homeInfo.operationCfg}
-              sale={homeInfo.saleCenter}
-            /> */}
-
-            {/* 品牌制造 */}
-            {/* <Manufactory
-              data={homeInfo.manufactory}
-              boss={homeInfo.dingBossRcmd}
-            /> */}
-
-            {/* 限时购 */}
-            {/* <FlashSale data={homeInfo.flashSale} /> */}
-
-            {/* 人气推荐 */}
-            {/* <Popular data={homeInfo.popularItems} /> */}
-
-            {/* 类目热销榜 */}
-            {/* <Category data={homeInfo.hotCategory} /> */}
+            <Policy list={homeInfo.policyDesc} />  
           </View>
 
           {/* 为你推荐 */}
-          <Recommend list={recommend} />
-
+          {/*< Recommend list={recommend}  /> */}
+          <Lottery list={products} />
           {this.state.loading &&
             <View className='home__loading'>
               <Text className='home__loading-txt'>正在加载中...</Text>

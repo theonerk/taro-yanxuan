@@ -1,12 +1,14 @@
 import {
   HOME_INFO, HOME_SEARCH_COUNT, HOME_RECOMMEND, HOME_PIN
 } from '@constants/home'
+import { PRODUCT_LIST } from '@constants/product'
 
 const INITIAL_STATE = {
   homeInfo: {},
   searchCount: 0,
   pin: [],
-  recommend: []
+  recommend: [],
+  products:[]
 }
 
 export default function home(state = INITIAL_STATE, action) {
@@ -24,7 +26,7 @@ export default function home(state = INITIAL_STATE, action) {
       }
     }
     case HOME_PIN: {
-      // 每3个分成一组
+      
       const pin = []
       action.payload.forEach((item, index) => {
         const groupIndex = parseInt(index / 3)
@@ -34,6 +36,14 @@ export default function home(state = INITIAL_STATE, action) {
         pin[groupIndex].push(item)
       })
       return { ...state, pin }
+    }
+     case PRODUCT_LIST: {  
+      return {
+        ...state,
+        products:{
+          ...action.payload
+        }
+      }
     }
     case HOME_RECOMMEND: {
       return {

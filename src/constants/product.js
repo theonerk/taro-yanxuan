@@ -1,0 +1,3 @@
+export const PRODUCT_LIST = 'PRODUCT_LIST'
+export const PRODUCT_GET_BY_ID = 'PRODUCT_GET_BY_ID'
+

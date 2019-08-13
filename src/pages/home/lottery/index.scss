@@ -1,0 +1,134 @@
+@import "@styles/theme.scss";
+
+.home-recommend {
+  margin-top: 40px;
+  background: #ffffff;
+}
+
+.home-recommend__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+
+  &-txt {
+    color: $black;
+    font-size: 28px;
+    line-height: 28px;
+    font-weight: bold;
+  }
+}
+
+.home-recommend__list {
+  
+  height: 290rpx;
+  margin: 0rpx 0rpx 20rpx 0rpx;
+  background-color: #ffffff;
+  
+
+  &-item { 
+    padding: 0 15px 40px;
+     
+    &-desc {
+      font-family: "PingFangSC-Regular";
+      font-size: 26rpx;
+      color: #333333;
+      padding-right: 30rpx;
+      padding-top: 15rpx;
+      padding-left: 40rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      
+      @include text-ellipsis;
+    }
+
+    &-img {
+      width: 290rpx;
+      height: 290rpx;
+      float: left;
+      
+    }
+
+    &-info {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-name {
+      font-family: "PingFangSC-Medium";
+      font-size: 32rpx;
+      color: #333333;
+      padding-right: 30rpx;
+      padding-top: 38rpx;
+      padding-left: 40rpx;
+      line-height: 50rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      @include text-ellipsis;
+    }
+
+    &-price-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &-price {
+      font-family: "PingFangSC-Medium";
+      font-size: 32rpx;
+      color: #333333;
+      padding-right: 30rpx;
+      padding-top: 38rpx;
+      padding-left: 40rpx;
+      line-height: 50rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    &-price--origin {
+      margin-left: 14px;
+      color: $text-color-lighter;
+      font-size: 30px;
+      font-weight: 200;
+      line-height: 48px;
+      text-decoration: line-through;
+      text-decoration-color: $text-color-lighter;
+    }
+
+    &-commend {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 10px;
+      padding: 0 10px;
+      height: 70px;
+      border-radius: 35px;
+      background: #f3f3f3;
+
+      &-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+      }
+
+      &-txt {
+        flex: 1;
+        margin-left: 10px;
+        color: $text-color-lighter;
+        font-size: 24px;
+        line-height: 30px;
+        @include lamp-clamp(2);
+      }
+    }
+  }
+}

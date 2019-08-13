@@ -44,4 +44,4 @@ export const API_ITEM_RECOMMEND = `${host}/xhr/rcmd/itemDetail.json`
 export const API_USER_WeChat_LOGIN = `${real_host}/login`
 export const API_USER_RROFILE = `${real_host}/api/user`
 
-export const API_PRODUCTS=`${real_host}/api/products`
+export const API_PRODUCTS=`${real_host}/public/products`
