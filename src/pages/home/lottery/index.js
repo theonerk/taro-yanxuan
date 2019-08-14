@@ -8,9 +8,10 @@ export default class Lottery extends Component {
     list: []
   }
 
-  handleClick = (id) => {
-    Taro.navigateTo({
-      url: `/pages/item/item?itemId=${id}`
+  handleClick = (id) => {   
+    Taro.navigateTo({ 
+      url: `/pages/product/product?productId=${id}`
+      //url: `/pages/item/item?itemId=3402020`
     })
   }
 
@@ -39,7 +40,15 @@ export default class Lottery extends Component {
                     {item.desc} 
              </Text> 
               <Text className='home-recommend__list-item-price'  >
-                    原价：{item.prize} 
+                    市场价：{item.retail_price}  
+             </Text> 
+              <Text className='home-recommend__list-item-price'  >
+                   促销价：{item.activity_price}
+             </Text> 
+              <Text className='home-recommend__list-item-price'  >
+                   活动参与价：{item.lottery_price}
+             </Text> 
+              <Text className='home-recommend__list-item-price'  >
              </Text> 
             </View>
             

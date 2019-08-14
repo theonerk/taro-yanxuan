@@ -16,7 +16,7 @@ import './item.scss'
 @connect(state => state.item, { ...actions, dispatchAdd })
 class Item extends Component {
   config = {
-    navigationBarTitleText: '商品详情'
+    navigationBarTitleText: '详情页'
   }
 
   constructor(props) {

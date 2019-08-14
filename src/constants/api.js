@@ -45,3 +45,4 @@ export const API_USER_WeChat_LOGIN = `${real_host}/login`
 export const API_USER_RROFILE = `${real_host}/api/user`
 
 export const API_PRODUCTS=`${real_host}/public/products`
+export const API_PRODUCT_DETAIL = `${real_host}/public/products`

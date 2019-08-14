@@ -1,5 +1,5 @@
 import {
-  HOME_INFO, HOME_SEARCH_COUNT, HOME_RECOMMEND, HOME_PIN
+  HOME_INFO//, HOME_SEARCH_COUNT, HOME_RECOMMEND, HOME_PIN
 } from '@constants/home'
 import { PRODUCT_LIST } from '@constants/product'
 
@@ -19,7 +19,7 @@ export default function home(state = INITIAL_STATE, action) {
         homeInfo: action.payload
       }
     }
-    case HOME_SEARCH_COUNT: {
+   /* case HOME_SEARCH_COUNT: {
       return {
         ...state,
         searchCount: action.payload.count
@@ -37,6 +37,12 @@ export default function home(state = INITIAL_STATE, action) {
       })
       return { ...state, pin }
     }
+     case HOME_RECOMMEND: {
+      return {
+        ...state,
+        recommend: state.recommend.concat(action.payload.rcmdItemList)
+      }
+    }*/
      case PRODUCT_LIST: {  
       return {
         ...state,
@@ -45,12 +51,7 @@ export default function home(state = INITIAL_STATE, action) {
         }
       }
     }
-    case HOME_RECOMMEND: {
-      return {
-        ...state,
-        recommend: state.recommend.concat(action.payload.rcmdItemList)
-      }
-    }
+   
     default:
       return state
   }
