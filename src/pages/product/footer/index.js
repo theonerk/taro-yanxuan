@@ -30,10 +30,12 @@ export default class Footer extends Component {
   }
 
   handleBuy = () => {
-    Taro.showToast({
-      title: '暂时只支持加入购物车',
-      icon: 'none'
-    })
+  //  Taro.showToast({
+  //    title: '暂时只支持加入购物车',
+  //    icon: 'none'
+  //  })
+  const params= {};
+  Taro.requestPayment(params).then();
   }
 
   render () {
