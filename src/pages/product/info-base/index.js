@@ -9,11 +9,7 @@ export default class InfoBase extends Component {
   }
 
   render () {
-    const { product } = this.props
-    console.log("this.props:",this.props);
-    
-    console.log("product.retailPrice:",product.retailPrice);
-    
+    const { product } = this.props 
     
     return (
       <View className='item-info-base'>

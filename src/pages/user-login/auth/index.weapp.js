@@ -2,8 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { ButtonItem } from '@components'
 import * as actions from '@actions/user'
 import { connect } from '@tarojs/redux'
-
-// XXX 仅仅作为多端组件示例，实际只实现了邮箱登录
+ 
 @connect(state => state.user, { ...actions })
 export default class AUth extends Component {
   agreeAuth = () => {
@@ -20,8 +19,7 @@ export default class AUth extends Component {
             code: code
           } 
           this.props.dispatchLogin_Real(payload).then(() =>{
-             // console.log("login !!!");  
-             // console.log(result);    
+                
               Taro.showToast({
               title: `欢迎: ${userInfo.nickName}！`,
               icon: 'none'

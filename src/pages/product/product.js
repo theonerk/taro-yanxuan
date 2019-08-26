@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, ScrollView } from '@tarojs/components'
-import { Popup, Loading } from '@components'
+//import { Popup, Loading } from '@components'
 import { connect } from '@tarojs/redux'
 import Gallery from './gallery'
 import InfoBase from './info-base'
@@ -67,7 +67,7 @@ handleFloatLayoutChange (flag) {
             onClose={this.handleFloatLayoutChange.bind(this, false)}
           >
             <View className='content-wrapper'>
-            <DoLottery product={product}  />
+             <DoLottery product={product}  />
             </View>
           </AtFloatLayout>
            

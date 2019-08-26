@@ -46,3 +46,8 @@ export const API_USER_RROFILE = `${real_host}/api/user`
 
 export const API_PRODUCTS=`${real_host}/public/products`
 export const API_PRODUCT_DETAIL = `${real_host}/public/products`
+
+
+// order 
+export const API_LOTTERY_PAY = `${real_host}/api/order`
+export const API_LOTTERY_GEY = `${real_host}/api/order`

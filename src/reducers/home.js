@@ -5,7 +5,7 @@ import { PRODUCT_LIST } from '@constants/product'
 
 const INITIAL_STATE = {
   homeInfo: {},
-  searchCount: 0,
+ 
   pin: [],
   recommend: [],
   products:[]

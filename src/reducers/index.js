@@ -5,6 +5,7 @@ import home from './home'
 import item from './item'
 import user from './user'
 import product from './product'
+import order from './order'
 
 export default combineReducers({
   home,
@@ -12,5 +13,6 @@ export default combineReducers({
   cart,
   item,
   user,
-  product
+  product,
+  order
 })
