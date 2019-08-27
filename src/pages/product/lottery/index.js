@@ -58,10 +58,18 @@ handleLottery=()=>{
               }) 
              
            }).catch(
-             () => {
+             (error) => {
+               console.log(error);
+               let errorTitle="请求失败，稍后再试！"
+               if(error.code =='401')
+               {
+                 errorTitle="请登录后再试!";
+               }
+
+               
              this.setState({ loading: false })
               Taro.showToast({
-              title: `失败`,
+              title: errorTitle,
               icon: 'none'
               })
             }

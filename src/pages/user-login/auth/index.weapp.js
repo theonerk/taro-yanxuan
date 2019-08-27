@@ -24,7 +24,7 @@ export default class AUth extends Component {
               title: `欢迎: ${userInfo.nickName}！`,
               icon: 'none'
               })
-              Taro.navigateBack({ delta: 2 })
+              Taro.navigateBack({ delta: 1})
            }
            ).catch(() => {
               Taro.showToast({
