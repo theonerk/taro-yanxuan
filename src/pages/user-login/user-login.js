@@ -38,34 +38,13 @@ class UserLogin extends Component {
     })
   }
 
-  render () {
-    const BUTTON = {
-      marginTop: Taro.pxTransform(30)
-    }
+  render () { 
 
     return (
       <View className='user-login'>
-        <View className='user-login__logo'>
-          <Image src={LOGO} className='user-login__logo-img' />
-        </View>
+        
         <Auth />
-        <ButtonItem
-          plain
-          text='邮箱账号登录'
-          compStyle={BUTTON}
-          onClick={this.handleClick.bind(this, 'email')}
-        />
-        <ButtonItem
-          plain
-          text='手机号登录'
-          compStyle={BUTTON}
-          onClick={this.handleClick.bind(this, 'telephone')}
-        />
-        <View className='user-login__reg'>
-          <Text className='user-login__reg-txt'>
-            {'手机号快捷注册>'}
-          </Text>
-        </View>
+        
       </View>
     )
   }

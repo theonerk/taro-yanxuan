@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { API_USER, API_USER_LOGIN,API_USER_WeChat_LOGIN } from '@constants/api'
 
 const CODE_SUCCESS = '200'
-const CODE_AUTH_EXPIRED = '600'
+const CODE_AUTH_EXPIRED = '401'
 
 function getStorage(key) {
   return Taro.getStorage({ key }).then(res => res.data).catch(() => '')
@@ -71,6 +71,8 @@ export default async function fetch(options) {
 
     return data
   }).catch((err) => {
+    console.log("err:",err);
+    
     const defaultMsg = err.code === CODE_AUTH_EXPIRED ? '登录失效' : '请求异常'
     if (showToast) {
       Taro.showToast({

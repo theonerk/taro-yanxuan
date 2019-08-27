@@ -6,7 +6,7 @@ import { createAction } from '@utils/redux'
  * lottery for one product
  * @param {*} payload
  */
-export const lottryPay = payload => createAction({
+export const onLottryPay = payload => createAction({
   url: API_LOTTERY_PAY, 
   method:'POST',
   type: LOTTERY_PAY,
