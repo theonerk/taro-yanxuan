@@ -1,10 +1,12 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View, Text} from '@tarojs/components'
-import {ButtonItem, InputItem } from '@components'
-import './index.scss'
 import { connect } from '@tarojs/redux'
 import * as actions from '@actions/order'
 import { AtInput }  from 'taro-ui'
+import Taro, { Component } from '@tarojs/taro'
+import { View, Text} from '@tarojs/components'
+import {ButtonItem } from '@components'
+import './index.scss'
+
+
 
 @connect(state => state.order, { ...actions })
 export default class DoLottery extends Component {
@@ -50,14 +52,18 @@ handleLottery=()=>{
             amount: amount*100
           }
   this.setState({ loading: true })
-  this.props.onLottryPay(payload).then(() =>{
-            this.setState({ loading: false })
+  this.props.onLottryPay(payload).then((result) =>{
+    console.log('result:',result);
+    
+    
+    
+    this.setState({ loading: false })
               Taro.showToast({
               title: `成功！`,
               icon: 'none'
               }) 
              
-           }).catch(
+    }).catch(
              (error) => {
                console.log(error);
                let errorTitle="请求失败，稍后再试！"
