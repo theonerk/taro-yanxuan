@@ -16,7 +16,9 @@ export default class DoLottery extends Component {
   state = {
     amount: 0, 
     loading: false,  
-    isBtnDisabled:false 
+    isBtnDisabled:false,
+    lottery_price:0,
+    message:'',
   }
  componentDidMount() {  
     const { product } = this.props 
@@ -25,8 +27,13 @@ export default class DoLottery extends Component {
     {
       this.setState({amount:product.lottery_price})
       this.setState({isBtnDisabled:false})
+       this.setState({lottery_price:product.lottery_price})
     } 
   }
+  componentWillUnmount() {
+     this.setState({message:''})
+  }
+
 handleInput = (key, value) => { 
     value = value.replace(/[^\d\.]/g, "");
     value = value.replace(/^\./g, "");
@@ -35,8 +42,7 @@ handleInput = (key, value) => {
     value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');  
     const isValidAmount = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/.test(value); 
     if(isValidAmount)
-    {  
-      console.log("changes");
+    {   
       this.setState({isBtnDisabled:false}); 
       this.setState({amount:value});
       return value;
@@ -53,34 +59,32 @@ handleLottery=()=>{
           }
   this.setState({ loading: true })
   this.props.onLottryPay(payload).then((result) =>{
-    console.log('result:',result);
-    
-    
-    
+    console.log('result:',result); 
+    if(result.number && result.number>1)
+    {
+      this.setState({message:'已经有人和你出价相同，建议再出价！'})
+    }
+    else
+    {
+       this.setState({message:'当前您是此价格唯一拥有者！'})
+    }
     this.setState({ loading: false })
-              Taro.showToast({
-              title: `成功！`,
-              icon: 'none'
-              }) 
-             
-    }).catch(
-             (error) => {
-               console.log(error);
-               let errorTitle="请求失败，稍后再试！"
-               if(error.code =='401')
-               {
-                 errorTitle="请登录后再试!";
-               }
-
-               
-             this.setState({ loading: false })
-              Taro.showToast({
-              title: errorTitle,
-              icon: 'none'
-              })
-            }
-           ); 
-
+    Taro.showToast({
+      title: `成功！`,
+      icon: 'none'
+    }) 
+  }).catch((error) => {
+    console.log(error);
+    let errorTitle="请求失败，稍后再试！"
+    if(error.code =='401')
+    {errorTitle="请登录后再试!";}
+    this.setState({ loading: false })
+    Taro.showToast({
+      title: errorTitle,
+      icon: 'none'
+      })
+    }
+  );  
 }
  
 render () {
@@ -88,7 +92,7 @@ render () {
     return (
       <View className='user-login-email'>
         <View className='user-login-email__wrap'> 
-            <Text className='item-info-base__header-name'>请输入你的出价(大于 {product.lottery_price} 元)：</Text>  
+            <Text className='item-info-base__header-name'>请输入你的出价(大于 {this.state.lottery_price} 元)：</Text>  
            
             <AtInput
               value={this.state.amount}
@@ -112,6 +116,7 @@ render () {
             }}
          />
      </View>
+     <Text>{this.state.message}</Text>
        
       </View>
     )

@@ -82,7 +82,7 @@ class Home extends Component {
       return <Loading />
     }
 
-    const { homeInfo ,recommend,products } = this.props
+    const { homeInfo ,products } = this.props
    
     
     return (
@@ -101,7 +101,7 @@ class Home extends Component {
           {/* 为你推荐 */}
           {/*< Recommend list={recommend}  /> */}
           <Lottery list={products} />
-          {this.state.loading &&
+          {/*this.state.loading &&
             <View className='home__loading'>
               <Text className='home__loading-txt'>正在加载中...</Text>
             </View>
@@ -110,7 +110,7 @@ class Home extends Component {
             <View className='home__loading home__loading--not-more'>
               <Text className='home__loading-txt'>更多内容，敬请期待</Text>
             </View>
-          }
+          */}
         </ScrollView>
       </View>
     )
