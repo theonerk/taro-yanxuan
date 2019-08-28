@@ -1,4 +1,4 @@
-import {  LOTTERY_PAY,LOTTERY_GET} from '@constants/lottery'
+import {  LOTTERY_PAY,LOTTERY_GET_BY_PRODUCT_ID} from '@constants/lottery'
 import { API_LOTTERY_PAY,API_LOTTERY_GEY } from '@constants/api'
 import { createAction } from '@utils/redux'
 
@@ -17,8 +17,8 @@ export const onLottryPay = payload => createAction({
  * get lottery record
  * @param {*} payload
  */
-export const getLottery = payload => createAction({
-  url: API_LOTTERY_GEY,
-  type: LOTTERY_GET, 
+export const onLotteryGetByProductId = payload => createAction({
+  url: API_LOTTERY_GEY+'/'+payload.productId+'/'+'lottery',
+  type: LOTTERY_GET_BY_PRODUCT_ID, 
   payload
 })

@@ -1,6 +1,7 @@
 import { connect } from '@tarojs/redux'
 import * as actions from '@actions/order'
-import { AtInput }  from 'taro-ui'
+import { AtInput , AtTimeline }  from 'taro-ui'
+
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text} from '@tarojs/components'
 import {ButtonItem } from '@components'
@@ -11,14 +12,16 @@ import './index.scss'
 @connect(state => state.order, { ...actions })
 export default class DoLottery extends Component {
   static defaultProps = {
-    product: {}, 
+    product: {},
+    timeLineItems:{},
   }
   state = {
     amount: 0, 
     loading: false,  
     isBtnDisabled:false,
     lottery_price:0,
-    message:'',
+    message:'' 
+    
   }
  componentDidMount() {  
     const { product } = this.props 
@@ -27,8 +30,12 @@ export default class DoLottery extends Component {
     {
       this.setState({amount:product.lottery_price})
       this.setState({isBtnDisabled:false})
-       this.setState({lottery_price:product.lottery_price})
+      this.setState({lottery_price:product.lottery_price})
     } 
+    const {lotteryList} = this.props;
+    this.setState(lotteryList);
+   
+    
   }
   componentWillUnmount() {
      this.setState({message:''})
@@ -87,11 +94,12 @@ handleLottery=()=>{
   );  
 }
  
-render () {
+render () { 
+   const { lotteryList,timeLineItems } = this.props;  
    
     return (
-      <View className='user-login-email'>
-        <View className='user-login-email__wrap'> 
+      <View className='user-lottery'>
+        <View className='user-lottery__wrap'> 
             <Text className='item-info-base__header-name'>请输入你的出价(大于 {this.state.lottery_price} 元)：</Text>  
            
             <AtInput
@@ -101,7 +109,7 @@ render () {
               onChange={this.handleInput.bind(this, 'amount')}
             /> 
         </View>
-     <View className='user-login-email__btn'>
+     <View className='user-lottery_btn'>
          <ButtonItem
            text='出价'
            disabled={this.state.isBtnDisabled}
@@ -117,7 +125,12 @@ render () {
          />
      </View>
      <Text>{this.state.message}</Text>
-       
+    <AtTimeline  
+      items={timeLineItems}
+    >
+  </AtTimeline>
+     
+      
       </View>
     )
   }
