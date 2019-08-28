@@ -1,19 +1,6 @@
-@import "@styles/theme.scss";
+ 
 @import "~taro-ui/dist/style/components/float-layout.scss";
-.item {
-  position: relative;
-  overflow: hidden;
-}
-
-.item__wrap {
-  padding-bottom: 100px;
-  background: #fafafa;
-}
-
-.item__footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
+@import "~taro-ui/dist/style/components/flex.scss";
+.view_price{
+    min-height: 0;
 }

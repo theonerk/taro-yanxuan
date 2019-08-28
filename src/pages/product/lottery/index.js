@@ -1,7 +1,8 @@
 import { connect } from '@tarojs/redux'
 import * as actions from '@actions/order'
-import { AtInput , AtTimeline }  from 'taro-ui'
+import { AtInput , AtTimeline , AtModal, AtModalHeader, AtModalContent, AtModalAction,AtButton }  from 'taro-ui'
 
+import { checkNumbers,convertMoney } from '@utils/helper'
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text} from '@tarojs/components'
 import {ButtonItem } from '@components'
@@ -12,15 +13,15 @@ import './index.scss'
 @connect(state => state.order, { ...actions })
 export default class DoLottery extends Component {
   static defaultProps = {
-    product: {},
-    timeLineItems:{},
+    product: {}, 
   }
   state = {
     amount: 0, 
     loading: false,  
     isBtnDisabled:false,
     lottery_price:0,
-    message:'' 
+    message:'',
+    items:[] 
     
   }
  componentDidMount() {  
@@ -67,6 +68,11 @@ handleLottery=()=>{
   this.setState({ loading: true })
   this.props.onLottryPay(payload).then((result) =>{
     console.log('result:',result); 
+    let newItem = {};
+    newItem.title = '刚刚' + '  ' + convertMoney(result.amount)+'元  '+ checkNumbers(result.number);
+    let items = this.state.items;
+    items.push(newItem);
+    this.setState(items);       
     if(result.number && result.number>1)
     {
       this.setState({message:'已经有人和你出价相同，建议再出价！'})
@@ -95,20 +101,20 @@ handleLottery=()=>{
 }
  
 render () { 
-   const { lotteryList,timeLineItems } = this.props;  
+   const {timeLineItems } = this.props;  
+   this.setState({items:timeLineItems});
    
-    return (
-      <View className='user-lottery'>
-        <View className='user-lottery__wrap'> 
-            <Text className='item-info-base__header-name'>请输入你的出价(大于 {this.state.lottery_price} 元)：</Text>  
-           
+  return (
+    <View className='user-lottery'>
+      <View className='user-lottery__wrap'> 
+          <Text className='item-info-base__header-name'>请输入你的出价(大于 {this.state.lottery_price} 元)：</Text>  
             <AtInput
               value={this.state.amount}
               type='digit' 
               placeholder='出价'
               onChange={this.handleInput.bind(this, 'amount')}
             /> 
-        </View>
+      </View>
      <View className='user-lottery_btn'>
          <ButtonItem
            text='出价'
@@ -125,10 +131,17 @@ render () {
          />
      </View>
      <Text>{this.state.message}</Text>
-    <AtTimeline  
-      items={timeLineItems}
-    >
+    <AtModal isOpened>
+  <AtModalHeader>标题</AtModalHeader>
+  <AtModalContent>
+   <AtTimeline  
+     items={this.state.items}
+   >
   </AtTimeline>
+  </AtModalContent>
+  <AtModalAction> <AtButton>取消</AtButton> <AtButton>确定</AtButton> </AtModalAction>
+</AtModal>
+    
      
       
       </View>
