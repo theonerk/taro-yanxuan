@@ -2,8 +2,8 @@ import * as actions from '@actions/product'
  
 import { onLotteryGetByProductId,onLottryPay } from '@actions/order'
 import { getWindowHeight } from '@utils/style'
-import { AtInput , AtFloatLayout,AtButton }  from 'taro-ui'
-import { Swiper, SwiperItem , View, Text, ScrollView } from '@tarojs/components'
+import { AtInput , AtFloatLayout,AtButton,AtModal,AtModalHeader,AtModalContent,AtModalAction,AtTimeline }  from 'taro-ui'
+import {  View, Text, ScrollView } from '@tarojs/components'
 import { convertTime,checkNumbers,convertMoney } from '@utils/helper'
 
 import Taro, { Component } from '@tarojs/taro'
@@ -30,6 +30,7 @@ config = {
       timeLineItems:[],
       isBtnDisabled:true,
       amount:0,
+      isLotteryHistoryShow:false
      
     }
     this.productId = parseInt(this.$router.params.productId)
@@ -68,7 +69,10 @@ handleInput = (key, value) => {
 handleFloatLayoutChange (flag) {
    
    console.log("flag:",flag);
-   
+    if(flag)
+    {
+       this.setState({isLotteryHistoryShow:false})
+    }
     if(flag && !this.state.loaded)
     {
       console.log("try to get lottery history");
@@ -83,6 +87,16 @@ handleFloatLayoutChange (flag) {
           lotteryList.forEach(lottery => {
             let item = {};
             item.title = convertTime(lottery.createdAt) + '  ' + convertMoney(lottery.amount)+'元  '+ checkNumbers(lottery.number);
+            if(parseInt(lottery.number)<2)
+            {
+              item.icon='check'
+              }
+            else{
+              item.icon='close'
+              item.color='red'
+            }
+            console.log('item:',item);
+            
             timeLineItems.push(item);
           }); 
           this.setState({timeLineItems:timeLineItems})
@@ -146,7 +160,10 @@ handleLottery=()=>{
     }
   );  
 }
-
+handleShowLotteryHistory=(isShow)=>{
+  this.setState({isLotteryHistoryShow:isShow})
+  this.setState({ isFloatLayoutOpened: false })
+}
 
 render () {
     const { products } = this.props
@@ -186,25 +203,34 @@ render () {
           <View className='at-row'>
             <View className='at-col'>
              <AtButton  
+               onClick={this.handleShowLotteryHistory.bind(this,true)}
+               onClose={this.handleShowLotteryHistory.bind(this,false)}
+             >
+          历史出价
+          </AtButton></View>
+            <View className='at-col'>
+             <AtButton  
+               type='primary'
                disabled={this.state.isBtnDisabled}
                loading={this.state.loading}
                onClick={this.handleLottery.bind(this)}
              >
           出价
           </AtButton></View>
-            <View className='at-col'>
-             <AtButton  
-               disabled={this.state.isBtnDisabled}
-               loading={this.state.loading}
-               onClick={this.handleLottery.bind(this)}
-             >
-          历史出价
-          </AtButton></View>
             
-          </View>
-         
+          </View> 
            <Text>{this.state.message}</Text>
+            
          </AtFloatLayout> 
+         <AtModal isOpened={this.state.isLotteryHistoryShow}>
+            <AtModalHeader>历史出价</AtModalHeader>
+            <AtModalContent>
+            <AtTimeline  
+              items={this.state.timeLineItems}
+            >
+            </AtTimeline>
+            </AtModalContent>
+          </AtModal>
             </ScrollView>   
             <View className='item__footer'>
              <Footer onAdd={this.handleFloatLayoutChange.bind(this, true)} />
