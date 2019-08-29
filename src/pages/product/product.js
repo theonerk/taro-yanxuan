@@ -2,7 +2,7 @@ import * as actions from '@actions/product'
  
 import { onLotteryGetByProductId,onLottryPay } from '@actions/order'
 import { getWindowHeight } from '@utils/style'
-import { AtInput , AtFloatLayout,AtButton,AtModal,AtModalHeader,AtModalContent,AtModalAction,AtTimeline }  from 'taro-ui'
+import { AtInput , AtFloatLayout,AtButton,AtModal,AtModalHeader,AtModalContent,AtTimeline }  from 'taro-ui'
 import {  View, Text, ScrollView } from '@tarojs/components'
 import { convertTime,checkNumbers,convertMoney } from '@utils/helper'
 
@@ -37,6 +37,7 @@ config = {
      
 }
  componentDidMount() {
+   Taro.showShareMenu()
    const { products } = this.props 
    const product = products[0]
     if(product.lottery_price)

@@ -45,6 +45,7 @@ class Home extends Component {
     this.props.dispatchPin({ orderType: 4, size: 12 })
     this.loadRecommend()
     this.props.dispatchProducts();
+    Taro.showShareMenu()
   }
 
   loadRecommend = () => {

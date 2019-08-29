@@ -1,13 +1,11 @@
 import '@tarojs/async-await'
-import Taro, { Component } from '@tarojs/taro'
-import { Provider } from '@tarojs/redux'
-
-import Index from './pages/index'
-
-import configStore from './store'
-
-import './app.scss'
 import 'taro-ui/dist/style/index.scss'
+import Taro, { Component } from '@tarojs/taro'
+import { Provider } from '@tarojs/redux' 
+import Index from './pages/index'  
+import configStore from './store' 
+import './app.scss'
+
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -34,7 +32,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '低价严选',
+      navigationBarTitleText: '欢乐不停',
       navigationBarTextStyle: 'black'
     },
     tabBar: {
