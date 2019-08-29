@@ -1,6 +1,6 @@
 import * as actions from '@actions/product'
  
-import { onLotteryGetByProductId,onLottryPay } from '@actions/order'
+import { onLotteryGetByProductId,onLottryPay } from '@actions/lottery'
 import { getWindowHeight } from '@utils/style'
 import { AtInput , AtFloatLayout,AtButton,AtModal,AtModalHeader,AtModalContent,AtTimeline }  from 'taro-ui'
 import {  View, Text, ScrollView } from '@tarojs/components'
@@ -43,10 +43,9 @@ config = {
     if(product.lottery_price)
     {
       this.setState({amount:product.lottery_price})
-      this.setState({isBtnDisabled:false})
-    //  this.setState({lottery_price:product.lottery_price})
+      this.setState({isBtnDisabled:false}) 
     } 
-    console.log('this.productId: ',this.productId );  
+    
   }
 handleAdd = () => {
      console.log('handleAdd:');
@@ -123,8 +122,7 @@ handleLottery=()=>{
   const product = products[0]
   const { amount } = this.state
   const payload = {
-            productId: product.id,
-            orderType:2,
+            productId: product.id, 
             amount: amount*100
           }
   this.setState({ loading: true })

@@ -7,7 +7,7 @@ import { createAction } from '@utils/redux'
  * @param {*} payload
  */
 export const onLottryPay = payload => createAction({
-  url: API_LOTTERY_PAY, 
+  url: API_LOTTERY_PAY+'/'+payload.productId, 
   method:'POST',
   type: LOTTERY_PAY,
   payload
@@ -18,7 +18,7 @@ export const onLottryPay = payload => createAction({
  * @param {*} payload
  */
 export const onLotteryGetByProductId = payload => createAction({
-  url: API_LOTTERY_GEY+'/'+payload.productId+'/'+'lottery',
+  url: API_LOTTERY_GEY+'/'+payload.productId,
   type: LOTTERY_GET_BY_PRODUCT_ID, 
   payload
 })

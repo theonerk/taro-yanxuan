@@ -49,5 +49,5 @@ export const API_PRODUCT_DETAIL = `${real_host}/public/products`
 
 
 // order 
-export const API_LOTTERY_PAY = `${real_host}/api/order`
-export const API_LOTTERY_GEY = `${real_host}/api/order`
+export const API_LOTTERY_PAY = `${real_host}/api/lottery`
+export const API_LOTTERY_GEY = `${real_host}/api/lottery`
